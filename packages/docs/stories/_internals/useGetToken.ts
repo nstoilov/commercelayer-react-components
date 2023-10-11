@@ -1,5 +1,8 @@
 import { authentication } from '@commercelayer/js-auth'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import Cookie from 'js-cookie'
+import { type TBaseReturn } from '@commercelayer/js-auth/lib/esm/types'
+import jwtDecode from 'jwt-decode'
 
 interface UseGetTokenOptions {
   userMode?: boolean
@@ -17,13 +20,15 @@ const customer = {
   password: '123456'
 }
 
+const COOKIE_KEY = `clToken:${salesChannel.slug}`
+
 export function useGetToken<T extends UseGetTokenOptions>(
   options?: T
 ): {
   accessToken: string
   endpoint: string
 } {
-  const [token, setToken] = useState('')
+  const [accessToken, setAccessToken] = useState(Cookie.get(COOKIE_KEY) ?? '')
   const clientId = salesChannel.clientId
   const slug = salesChannel.slug
   const scope = salesChannel.scope
@@ -35,29 +40,84 @@ export function useGetToken<T extends UseGetTokenOptions>(
           password: customer.password
         }
       : undefined
-  useEffect(() => {
-    const getToken = async (): Promise<void> => {
-      const token =
-        user == null
-          ? await authentication('client_credentials', {
-              clientId,
-              slug,
-              scope,
-              domain
-            })
-          : await authentication('password', {
-              clientId,
-              slug,
-              scope,
-              domain,
-              ...user
-            })
-      setToken(token.accessToken)
+
+  const initToken = useMemo(() => {
+    return async () => {
+      await generateNewToken({
+        clientId,
+        slug,
+        scope,
+        domain,
+        user
+      }).then(({ accessToken, expires }) => {
+        setAccessToken(accessToken)
+        Cookie.set(COOKIE_KEY, accessToken, { expires })
+      })
     }
-    void getToken()
   }, [])
+
+  useEffect(() => {
+    if (
+      accessToken == null ||
+      accessToken === '' ||
+      isTokenExpired({ accessToken, compareTo: new Date() })
+    ) {
+      void initToken()
+    }
+  }, [accessToken])
+
   return {
-    accessToken: token,
+    accessToken,
     endpoint: `https://${slug}.${domain}`
   }
+}
+
+async function generateNewToken({
+  clientId,
+  slug,
+  scope,
+  domain,
+  user
+}: {
+  clientId: string
+  slug: string
+  scope: string
+  domain: string
+  user?: { username: string; password: string }
+}): Promise<TBaseReturn> {
+  return user == null
+    ? await authentication('client_credentials', {
+        clientId,
+        slug,
+        scope,
+        domain
+      })
+    : await authentication('password', {
+        clientId,
+        slug,
+        scope,
+        domain,
+        ...user
+      })
+}
+
+function isTokenExpired({
+  accessToken,
+  compareTo
+}: {
+  accessToken?: string
+  compareTo: Date
+}): boolean {
+  if (accessToken == null || accessToken === '') {
+    return true
+  }
+
+  const { exp } = jwtDecode<{ exp: number }>(accessToken)
+
+  if (exp == null) {
+    return true
+  }
+
+  const nowTime = Math.trunc(compareTo.getTime() / 1000)
+  return nowTime > exp
 }
