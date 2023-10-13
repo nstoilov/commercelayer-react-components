@@ -15,16 +15,16 @@ You might want to use this component to render a list of user's orders in their 
 ### Full example
 The list is mainly composed by two components: `OrderList` and `OrderListRow` and works around the `order` object.
 
-- You can specify the `columns` you need to handle using the relative props in `<OrderList>`. Each columns is linked to a 
+- You can specify the `columns` you need to handle using the relative props in `<OrderList>`. Each columns is linked to an attribute of the `order` object.
 - Each value is then rendered with a `<OrderListRow>` component, which is a `<td>` element attached to a specific `field` of the order object.
 
 
 <span title="Rendering custom cell value" type="info">
 `<OrderListRow>` works out the box by automatically render the value of the field in a `<td>` tag, 
 but you can also use `children` prop to customize the output that will be rendered inside the `<td>` tag.
-Just remember that you don't have to write the `<td>` tag, **but only the content**.
+Just remember that you don't have to write the `<td>` tag, **but only the inner content**.
 <br/><br/>
-In the following example you can notice that the `number` column uses a custom children render, while content of other cells is rendered with the default values.
+In the following example you can notice that the `<OrderListRow field='number'>` cell uses a custom children render, while content of other cells is rendered with the default values.
 </span>
 
 
