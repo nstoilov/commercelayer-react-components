@@ -20,7 +20,8 @@ const customer = {
   password: '123456'
 }
 
-const COOKIE_KEY = `clToken:${salesChannel.slug}`
+const getCookieName = (userMode?: boolean): string =>
+  `clToken.${salesChannel.slug}.${userMode === true ? 'user' : 'guest'}`
 
 export function useGetToken<T extends UseGetTokenOptions>(
   options?: T
@@ -28,7 +29,9 @@ export function useGetToken<T extends UseGetTokenOptions>(
   accessToken: string
   endpoint: string
 } {
-  const [accessToken, setAccessToken] = useState(Cookie.get(COOKIE_KEY) ?? '')
+  const [accessToken, setAccessToken] = useState(
+    Cookie.get(getCookieName(options?.userMode)) ?? ''
+  )
   const clientId = salesChannel.clientId
   const slug = salesChannel.slug
   const scope = salesChannel.scope
@@ -51,7 +54,7 @@ export function useGetToken<T extends UseGetTokenOptions>(
         user
       }).then(({ accessToken, expires }) => {
         setAccessToken(accessToken)
-        Cookie.set(COOKIE_KEY, accessToken, { expires })
+        Cookie.set(getCookieName(options?.userMode), accessToken, { expires })
       })
     }
   }, [])
