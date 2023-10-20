@@ -21,6 +21,18 @@ interface Props {
   getQuantity?: (quantity: number) => void
 }
 
+/**
+ * Main container for the Availability components.
+ * It stores - in its context - the sku quantity returned from the `inventory_model` and the `delivery_lead_time` for the first shipping method found in the inventory model.
+ *
+ * It can be used to fetch the quantities for a specific `sku_code` passed as prop.
+ * <span title='Requirements' type='warning'>
+ * Must be a child of the `<CommerceLayer>` component.
+ * </span>
+ * <span title='Children' type='info'>
+ * `<AvailabilityTemplate>`
+ * </span>
+ */
 export function AvailabilityContainer({
   children,
   skuCode,
