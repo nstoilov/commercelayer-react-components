@@ -29,7 +29,7 @@
     "@storybook/testing-library": "^0.2.1",
     "@storybook/theming": "^7.4.5",
     "@types/js-cookie": "^3.0.4",
-    "@types/react": "^18.2.21",
+    "@types/react": "^18.2.23",
     "@vitejs/plugin-react": "^4.0.4",
     "babel-loader": "^9.1.2",
     "eslint": "^8.48.0",
