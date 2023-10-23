@@ -9,10 +9,10 @@ interface UseGetTokenOptions {
 }
 
 const salesChannel = {
-  clientId: '48ee4802f8227b04951645a9b7c8af1e3943efec7edd1dcfd04b5661bf1da5db',
-  slug: 'the-blue-brand-3',
-  scope: 'market:58',
-  domain: 'commercelayer.co'
+  clientId: 'Z5ypiDlsqgV8twWRz0GabrJvTKXad4U-PMoVAU-XvV0',
+  slug: 'react-components-store',
+  scope: 'market:15283',
+  domain: 'commercelayer.io'
 }
 
 const customer = {
@@ -37,7 +37,7 @@ export function useGetToken<T extends UseGetTokenOptions>(
   const scope = salesChannel.scope
   const domain = salesChannel.domain
   const user =
-    options?.userMode != null
+    options?.userMode === true
       ? {
           username: customer.username,
           password: customer.password
@@ -65,6 +65,7 @@ export function useGetToken<T extends UseGetTokenOptions>(
       accessToken === '' ||
       isTokenExpired({ accessToken, compareTo: new Date() })
     ) {
+      console.log('initToken')
       void initToken()
     }
   }, [accessToken])
@@ -115,12 +116,16 @@ function isTokenExpired({
     return true
   }
 
-  const { exp } = jwtDecode<{ exp: number }>(accessToken)
+  try {
+    const { exp } = jwtDecode<{ exp: number }>(accessToken)
 
-  if (exp == null) {
+    if (exp == null) {
+      return true
+    }
+
+    const nowTime = Math.trunc(compareTo.getTime() / 1000)
+    return nowTime > exp
+  } catch {
     return true
   }
-
-  const nowTime = Math.trunc(compareTo.getTime() / 1000)
-  return nowTime > exp
 }

@@ -25,5 +25,5 @@ const Template: StoryFn<typeof PricesContainer> = (args) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  skuCode: 'BABYONBU000000E63E7412MX'
+  skuCode: 'POST6191FFFFFF000000XXXX'
 }

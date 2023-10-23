@@ -51,11 +51,11 @@ export const AddSampleItems = (): JSX.Element => {
       <button
         onClick={async () => {
           await addToCart({
-            skuCode: 'HATBSBMUFFFFFF000000XXXX',
+            skuCode: '5PANECAP9D9CA1FFFFFFXXXX',
             quantity: 2
           })
           await addToCart({
-            skuCode: 'SWEETHMU000000FFFFFFMXXX',
+            skuCode: 'BACKPACK000000FFFFFFXXXX',
             quantity: 3
           })
         }}
@@ -80,14 +80,14 @@ async function fillOrder(
 ): Promise<void> {
   await cl.line_items.create({
     item_type: 'skus',
-    sku_code: 'HATBSBMUFFFFFF000000XXXX',
+    sku_code: '5PANECAP9D9CA1FFFFFFXXXX',
     quantity: 2,
     order: cl.orders.relationship(orderId)
   })
 
   await cl.line_items.create({
     item_type: 'skus',
-    sku_code: 'SWEETHMU000000FFFFFFMXXX',
+    sku_code: 'BACKPACK000000FFFFFFXXXX',
     quantity: 3,
     order: cl.orders.relationship(orderId)
   })

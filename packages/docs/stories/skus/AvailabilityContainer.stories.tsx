@@ -28,7 +28,7 @@ const Template: StoryFn<typeof AvailabilityContainer> = (args) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  skuCode: 'BABYONBU000000E63E7412MX',
+  skuCode: 'POLOMXXX000000FFFFFFLXXX',
   getQuantity: (quantity) => {
     console.log('quantity', quantity)
   }

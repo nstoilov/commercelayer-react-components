@@ -36,19 +36,24 @@ export const Default: StoryFn = (args) => {
     >
       <OrderStorage persistKey='cl-examples1-cartId'>
         <OrderContainer>
-          <section className='p-6 border rounded-lg mb-4'>
+          <section className='p-6 border rounded-lg mb-4 max-w-xl'>
             <legend className='text-lg font-bold'>Line items</legend>
             <LineItemsContainer>
-              <p className='text-large'>
+              <p className='text-large mb-4'>
                 Items count: <LineItemsCount />
               </p>
               <LineItem type='skus'>
-                <div className='flex gap-4'>
+                <div className='grid gap-4 grid-cols-[auto,5fr,auto,2fr,auto] mb-4 items-center'>
                   <LineItemImage width={50} />
                   <LineItemName />
-                  <LineItemQuantity max={10} />
-                  <Errors resource='line_items' field='quantity' />
-                  <LineItemAmount />
+                  <div>
+                    <LineItemQuantity
+                      max={10}
+                      className='p-2 border border-gray-300'
+                    />
+                    <Errors resource='line_items' field='quantity' />
+                  </div>
+                  <LineItemAmount className='text-right' />
                   <LineItemRemoveLink />
                 </div>
               </LineItem>

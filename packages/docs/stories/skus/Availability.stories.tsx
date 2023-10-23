@@ -29,7 +29,7 @@ const Template: StoryFn<typeof AvailabilityTemplate> = (args) => {
       accessToken='my-access-token'
       endpoint='https://demo-store.commercelayer.io'
     >
-      <AvailabilityContainer skuCode='BABYONBU000000E63E7412MX'>
+      <AvailabilityContainer skuCode='POLOMXXX000000FFFFFFLXXX'>
         <AvailabilityTemplate {...args} />
       </AvailabilityContainer>
     </CommerceLayer>
@@ -62,7 +62,7 @@ export const NotAvailable: StoryFn<typeof AvailabilityTemplate> = (args) => {
       accessToken='my-access-token'
       endpoint='https://demo-store.commercelayer.io'
     >
-      <AvailabilityContainer skuCode='BABYONBU000000FFFFFFNBXX'>
+      <AvailabilityContainer skuCode='TSHIRTWV000000FFFFFFSXXX'>
         <AvailabilityTemplate
           timeFormat='days'
           showShippingMethodName
@@ -86,7 +86,7 @@ export const ChildrenProps: StoryObj = () => {
       accessToken='my-access-token'
       endpoint='https://demo-store.commercelayer.io'
     >
-      <AvailabilityContainer skuCode='BABYONBU000000E63E7412MX'>
+      <AvailabilityContainer skuCode='POLOMXXX000000FFFFFFLXXX'>
         <AvailabilityTemplate>
           {(childrenProps) => {
             return (
