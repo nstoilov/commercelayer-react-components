@@ -14,7 +14,7 @@ interface Props {
  */
 function CommerceLayer({ children, ...props }: Props): JSX.Element {
   const { accessToken, endpoint } = useGetToken({
-    userMode: props.accessToken === 'user-access-token'
+    userMode: props.accessToken === 'customer-access-token'
   })
 
   return (

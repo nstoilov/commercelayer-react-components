@@ -5,7 +5,7 @@ import { AvailabilityContainer } from '#components/skus/AvailabilityContainer'
 import PricesContainer from '#components/prices/PricesContainer'
 
 const setup: Meta<typeof AvailabilityTemplate> = {
-  title: 'Components/Skus/Availability',
+  title: 'Components/Skus/AvailabilityTemplate',
   component: AvailabilityTemplate,
   argTypes: {
     showShippingMethodName: {
@@ -25,10 +25,7 @@ export default setup
 
 const Template: StoryFn<typeof AvailabilityTemplate> = (args) => {
   return (
-    <CommerceLayer
-      accessToken='my-access-token'
-      endpoint='https://demo-store.commercelayer.io'
-    >
+    <CommerceLayer accessToken='my-access-token'>
       <AvailabilityContainer skuCode='POLOMXXX000000FFFFFFLXXX'>
         <AvailabilityTemplate {...args} />
       </AvailabilityContainer>
@@ -97,9 +94,7 @@ export const ChildrenProps: StoryObj = () => {
                   {childrenProps.min?.hours} hours
                 </p>
                 <p className='font-bold'>The delivery_lead_times object</p>
-                <pre key={childrenProps.id}>
-                  {JSON.stringify(childrenProps, null, 2)}
-                </pre>
+                <pre>{JSON.stringify(childrenProps, null, 2)}</pre>
               </div>
             )
           }}

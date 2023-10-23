@@ -12,10 +12,7 @@ export default setup
 
 const Template: StoryFn<typeof Price> = (args) => {
   return (
-    <CommerceLayer
-      accessToken='my-access-token'
-      endpoint='https://demo-store.commercelayer.io'
-    >
+    <CommerceLayer accessToken='my-access-token'>
       <PricesContainer>
         <Price {...args} />
       </PricesContainer>

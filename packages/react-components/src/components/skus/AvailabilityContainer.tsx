@@ -27,7 +27,8 @@ interface Props {
  *
  * It can be used to fetch the quantities for a specific `sku_code` passed as prop.
  * <span title='Requirements' type='warning'>
- * Must be a child of the `<CommerceLayer>` component.
+ * Must be a child of the `<CommerceLayer>` component. <br/>
+ * Can be a child of the `<SkusContainer>` component and receive the `sku_code` from its context.
  * </span>
  * <span title='Children' type='info'>
  * `<AvailabilityTemplate>`

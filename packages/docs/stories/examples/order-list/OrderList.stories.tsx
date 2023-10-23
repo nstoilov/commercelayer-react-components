@@ -43,7 +43,7 @@ export const Default: StoryFn = (args) => {
   ]
 
   return (
-    <CommerceLayer accessToken='user-access-token'>
+    <CommerceLayer accessToken='customer-access-token'>
       <CustomerContainer>
         <OrderList
           type='orders'

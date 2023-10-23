@@ -65,7 +65,6 @@ export function useGetToken<T extends UseGetTokenOptions>(
       accessToken === '' ||
       isTokenExpired({ accessToken, compareTo: new Date() })
     ) {
-      console.log('initToken')
       void initToken()
     }
   }, [accessToken])
