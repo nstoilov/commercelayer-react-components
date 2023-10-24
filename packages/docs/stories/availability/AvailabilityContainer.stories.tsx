@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react'
 import CommerceLayer from '../_internals/CommerceLayer'
 import { AvailabilityContainer } from '#components/skus/AvailabilityContainer'
-import { Code } from '../_internals/Code'
 
 const setup: Meta<typeof AvailabilityContainer> = {
   title: 'Components/Availability/AvailabilityContainer',
@@ -16,12 +15,7 @@ const Template: StoryFn<typeof AvailabilityContainer> = (args) => {
       accessToken='my-access-token'
       endpoint='https://demo-store.commercelayer.io'
     >
-      <AvailabilityContainer {...args}>
-        <div>
-          I am the availability container, responsible to fetch <Code>sku</Code>{' '}
-          availability and <Code>delivery_lead_time</Code>
-        </div>
-      </AvailabilityContainer>
+      <AvailabilityContainer {...args}>...</AvailabilityContainer>
     </CommerceLayer>
   )
 }
@@ -31,5 +25,12 @@ Default.args = {
   skuCode: 'POLOMXXX000000FFFFFFLXXX',
   getQuantity: (quantity) => {
     console.log('quantity', quantity)
+  }
+}
+Default.parameters = {
+  docs: {
+    canvas: {
+      sourceState: 'shown'
+    }
   }
 }

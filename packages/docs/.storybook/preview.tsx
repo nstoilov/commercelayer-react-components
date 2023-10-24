@@ -28,11 +28,13 @@ const parameters: Parameters = {
         'Components',
         [
           'Availability',
-          ['AvailabilityContainer', 'AvailabilityTemplate'],
+          ['AvailabilityContainer'],
           'Prices',
           ['PricesContainer'],
           'Skus',
-          ['SkusContainer', 'Skus', 'SkuField']
+          ['SkusContainer', 'Skus'],
+          'Orders',
+          ['OrderStorage', 'OrderContainer']
         ]
       ]
     }

@@ -33,3 +33,10 @@ Default.args = {
     console.log('fetchOrder: ', order)
   }
 }
+Default.parameters = {
+  docs: {
+    canvas: {
+      sourceState: 'shown'
+    }
+  }
+}
