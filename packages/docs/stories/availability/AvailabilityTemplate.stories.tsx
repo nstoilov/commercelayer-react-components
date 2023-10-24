@@ -5,7 +5,7 @@ import { AvailabilityContainer } from '#components/skus/AvailabilityContainer'
 import PricesContainer from '#components/prices/PricesContainer'
 
 const setup: Meta<typeof AvailabilityTemplate> = {
-  title: 'Components/Skus/AvailabilityTemplate',
+  title: 'Components/Availability/AvailabilityTemplate',
   component: AvailabilityTemplate,
   argTypes: {
     showShippingMethodName: {

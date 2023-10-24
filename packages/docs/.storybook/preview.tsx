@@ -27,16 +27,12 @@ const parameters: Parameters = {
         'Getting Started',
         'Components',
         [
+          'Availability',
+          ['AvailabilityContainer', 'AvailabilityTemplate'],
           'Prices',
           ['PricesContainer'],
           'Skus',
-          [
-            'SkusContainer',
-            'Skus',
-            'SkuField',
-            'AvailabilityContainer',
-            'AvailabilityTemplate'
-          ]
+          ['SkusContainer', 'Skus', 'SkuField']
         ]
       ]
     }

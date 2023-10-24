@@ -4,7 +4,7 @@ import { AvailabilityContainer } from '#components/skus/AvailabilityContainer'
 import { Code } from '../_internals/Code'
 
 const setup: Meta<typeof AvailabilityContainer> = {
-  title: 'Components/Skus/AvailabilityContainer',
+  title: 'Components/Availability/AvailabilityContainer',
   component: AvailabilityContainer
 }
 
