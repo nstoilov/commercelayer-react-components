@@ -19,7 +19,7 @@ import LineItemRemoveLink from '#components/line_items/LineItemRemoveLink'
 import LineItemsEmpty from '#components/line_items/LineItemsEmpty'
 
 const setup: Meta = {
-  title: 'Examples/Skus'
+  title: 'Examples/Listing Page'
 }
 
 export default setup
