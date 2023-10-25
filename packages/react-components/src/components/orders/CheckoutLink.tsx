@@ -19,6 +19,7 @@ interface Props extends Omit<JSX.IntrinsicElements['a'], 'children'> {
   label?: string
   /**
    * Ignores `order.checkout_url` and redirects to the hosted checkout micro-frontend.
+   * @default true
    */
   hostedCheckout?: boolean
 }
