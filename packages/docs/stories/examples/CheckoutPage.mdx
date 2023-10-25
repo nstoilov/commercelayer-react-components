@@ -1,0 +1,37 @@
+import { Meta, Source, Canvas } from '@storybook/addon-docs';
+import * as Stories from './CheckoutPage.stories.tsx'
+
+
+<Meta of={Stories} />
+
+# Checkout page
+
+This guide will show you how to create a checkout cart page using this library.
+
+Usually a checkout page is structured will the following sections:
+- list of items to purchase
+- customer details form (billing and shipping addresses)
+- shipping method selection
+- payment method selection
+- confirm (pay) button
+
+You might decide to split the checkout process into multiple pages, but the general it follows the same concept.
+
+We will try to split this guide into pieces and show you how to create each section, but it's important to understand that even if each section is a separate block of components, 
+they are all connected to the same `OrderContainer`.
+
+It's also important to understand that shipping methods can't be selected if we don't know the customer shipping address (might be different from the billing address), 
+and payment methods can't be selected if we don't know the selected shipping method, since it might affect the total amount of the order.
+So the order of the sections is important.
+
+
+## List of items to purchase
+The list of items follows the same concept as the cart page, so we can use the same components to display the items except that we don't want to allow the user to change the quantities or remove the items.
+
+<Canvas of={Stories.ListOfItems} />
+
+## Customer details form
+The billing and shipping address form is related not only to the `OrderContainer`, but also to the `CustomerContainer` since we want to save the customer details for future orders.
+To simplify the guide we will use the billing address as same address for shipping and we will only consider guest customers.
+
+<Canvas of={Stories.CustomerAddresses} />

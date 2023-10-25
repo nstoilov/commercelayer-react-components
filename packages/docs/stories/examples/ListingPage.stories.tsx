@@ -79,13 +79,13 @@ export const Default: StoryFn = (args) => {
             <LineItemsContainer>
               <LineItemsEmpty text='Cart is empty' />
               <LineItem type='skus'>
-                <div className='flex gap-4 items-center mb-2'>
+                <div className='flex gap-4 items-center mb-4 last:mb-0'>
                   <div className='flex' />
                   <LineItemName />
-                  <LineItemQuantity>
-                    {({ quantity }) => <span>(&times;{quantity})</span>}
-                  </LineItemQuantity>
-
+                  <div>
+                    &times;
+                    <LineItemQuantity readonly />
+                  </div>
                   <LineItemRemoveLink className='ml-auto px-2 text-sm rounded bg-red-500 text-white' />
                 </div>
               </LineItem>

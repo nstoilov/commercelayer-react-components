@@ -106,10 +106,7 @@ const OrderContainer: React.FC<{ children: React.ReactNode }> = ({
                 <div className='flex gap-4 items-center mb-2'>
                   <div className='flex' />
                   <LineItemName />
-                  <LineItemQuantity>
-                    {({ quantity }) => <span>(&times;{quantity})</span>}
-                  </LineItemQuantity>
-
+                  <LineItemQuantity readonly />
                   <LineItemRemoveLink className='ml-auto px-2 text-sm rounded bg-red-500 text-white' />
                 </div>
               </LineItem>
