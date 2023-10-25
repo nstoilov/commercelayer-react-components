@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/react'
+import { type Meta, type StoryFn, type StoryObj } from '@storybook/react'
 import CommerceLayer from '../_internals/CommerceLayer'
 import OrderContainerComponent from '#components/orders/OrderContainer'
 import { AddToCartButton } from '#components/orders/AddToCartButton'
@@ -46,6 +46,50 @@ AddBundle.args = {
   className: 'px-3 py-2 bg-black text-white rounded disabled:opacity-50'
 }
 
+/**
+ * You can access the component children props to customize the button or use a different tag.
+ *
+ * In the following example we use a custom `div` tag with an `onClick` handler to add the item to the cart
+ * and show an alert with the `orderId` when the operation is successful.
+ */
+export const ChildrenProps: StoryObj = () => {
+  return (
+    <AddToCartButton skuCode='SWEATWCX000000FFFFFFXSXX' quantity='1'>
+      {(childrenProps) => {
+        return (
+          <div
+            role='button'
+            className='border-dotted border-2 border-blue-500 text-blue-500 p-4 w-auto inline'
+            onClick={() => {
+              void childrenProps.handleClick().then(({ orderId, success }) => {
+                if (success) {
+                  alert(`item added to cart with orderId ${orderId}`)
+                }
+              })
+            }}
+          >
+            Add to cart
+          </div>
+        )
+      }}
+    </AddToCartButton>
+  )
+}
+ChildrenProps.decorators = [
+  (Story) => {
+    return (
+      <CommerceLayer accessToken='my-access-token'>
+        <OrderStorage persistKey='cl-examples-addToCart'>
+          <OrderContainer>
+            <Story />
+          </OrderContainer>
+        </OrderStorage>
+      </CommerceLayer>
+    )
+  }
+]
+
+// Fake OrderContainer to show a cart recap block but keep it hidden in the documentation source code
 const OrderContainer: React.FC<{ children: React.ReactNode }> = ({
   children
 }) => {
@@ -53,7 +97,7 @@ const OrderContainer: React.FC<{ children: React.ReactNode }> = ({
     <OrderContainerComponent>
       <>{children}</>
 
-      <div className='mt-8 block'>
+      <div id='cart-recap' className='mt-8 block'>
         <LineItemsContainer>
           <LineItemsEmpty text='Cart is empty' />
           <div>
