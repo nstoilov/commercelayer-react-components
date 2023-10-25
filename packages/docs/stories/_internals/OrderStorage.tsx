@@ -48,6 +48,7 @@ export const AddSampleItems = (): JSX.Element => {
 
   return (
     <div>
+      <p className='mb-4'>Cart is empty</p>
       <button
         onClick={async () => {
           await addToCart({
@@ -59,8 +60,9 @@ export const AddSampleItems = (): JSX.Element => {
             quantity: 3
           })
         }}
+        className='py-2 px-4 bg-black text-white rounded text-sm'
       >
-        Fill cart with sample items
+        Click me to fill cart with sample items
       </button>
     </div>
   )

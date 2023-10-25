@@ -48,7 +48,9 @@ interface Props extends Omit<JSX.IntrinsicElements['a'], 'children'> {
  * This component generates a link to the hosted mfe-cart application.
  * In this way you can connect your shop application with our hosted micro-frontend.
  *
- * It can behave as standard link
+ * <span title="Requirement" type="warning">
+ * Must be a child of the `<OrderContainer>` component. <br />
+ * </span>
  */
 export function CartLink(props: Props): JSX.Element | null {
   const { label, children, type, customDomain, ...p } = props

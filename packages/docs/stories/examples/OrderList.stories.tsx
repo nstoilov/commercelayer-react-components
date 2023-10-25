@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react'
-import CommerceLayer from '../../_internals/CommerceLayer'
+import CommerceLayer from '../_internals/CommerceLayer'
 import CustomerContainer from '#components/customers/CustomerContainer'
 import OrderList from '#components/orders/OrderList'
 import OrderListEmpty from '#components/orders/OrderListEmpty'

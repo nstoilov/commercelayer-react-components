@@ -34,8 +34,12 @@ const parameters: Parameters = {
           'Skus',
           ['SkusContainer', 'Skus'],
           'Orders',
-          ['OrderStorage', 'OrderContainer']
-        ]
+          ['OrderStorage', 'OrderContainer'],
+          'Cart',
+          ['HostedCart', 'CartLink', 'AddToCartButton']
+        ],
+        'Examples',
+        ['Listing Page', 'Cart Page']
       ]
     }
   },

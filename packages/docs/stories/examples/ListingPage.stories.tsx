@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react'
-import CommerceLayer from '../../_internals/CommerceLayer'
+import CommerceLayer from '../_internals/CommerceLayer'
 import { Skus } from '#components/skus/Skus'
 import { SkusContainer } from '#components/skus/SkusContainer'
 import { SkuField } from '#components/skus/SkuField'
