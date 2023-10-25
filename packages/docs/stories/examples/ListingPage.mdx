@@ -67,8 +67,15 @@ To complete the example, we added a final block to the page that rapresent the i
 In this way you will be able to see a full interaction between nested contexts (OrderContainer and SkuContainer).
 
 
-### Final example
+### Full page example
 
 Here you can see the final example that applies the block explained above, ready to be used in your application.
 
 <Canvas of={Stories.Default} />
+
+
+### Using mini cart
+
+From the example above, we can replace the cart-recap gray block at the bottom of the page, with the `<HostedCart type="mini" openAdd />` component to open a mini cart every time a new item is added.
+
+<Canvas of={Stories.WithMiniCart} />

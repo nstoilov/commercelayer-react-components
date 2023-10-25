@@ -36,7 +36,7 @@ const parameters: Parameters = {
           'Orders',
           ['OrderStorage', 'OrderContainer'],
           'Cart',
-          ['HostedCart', 'CartLink', 'AddToCartButton']
+          ['AddToCartButton', 'HostedCart', 'CartLink']
         ],
         'Examples',
         ['Listing Page', 'Cart Page']
