@@ -10,6 +10,10 @@ import LineItem from '#components/line_items/LineItem'
 import LineItemQuantity from '#components/line_items/LineItemQuantity'
 import LineItemRemoveLink from '#components/line_items/LineItemRemoveLink'
 import LineItemsEmpty from '#components/line_items/LineItemsEmpty'
+import AvailabilityContainer from '#components/skus/AvailabilityContainer'
+import AvailabilityTemplate from '#components/skus/AvailabilityTemplate'
+import { SkusContainer } from '#components/skus/SkusContainer'
+import Skus from '#components/skus/Skus'
 
 const setup: Meta<typeof AddToCartButton> = {
   title: 'Components/Cart/AddToCartButton',
@@ -45,6 +49,45 @@ AddBundle.args = {
   quantity: '2',
   className: 'px-3 py-2 bg-black text-white rounded disabled:opacity-50'
 }
+
+/**
+ * You can combine components and contexts to render an `<AddToCartButton>` within a `<Sku>` context
+ * and get available quantity from the `<AvailabilityTemplate>` to control the button disable state.
+ */
+export const DisabledWhenOutOfStock: StoryObj = () => {
+  return (
+    <CommerceLayer accessToken='my-access-token'>
+      <OrderStorage persistKey='cl-examples-addToCart'>
+        <OrderContainer>
+          <SkusContainer
+            skus={['POLOMXXX000000FFFFFFLXXX', 'TSHIRTWV000000FFFFFFSXXX']}
+          >
+            <Skus>
+              <AvailabilityContainer>
+                <AvailabilityTemplate>
+                  {(childrenProps) => {
+                    return (
+                      <div className='mb-4 grid max-w-md'>
+                        Quantity available: {childrenProps.quantity}
+                        <AddToCartButton
+                          className='px-3 py-2 bg-black text-white rounded disabled:opacity-50'
+                          // reading quantity from the `AvailabilityTemplate` children props to disable the button
+                          disabled={childrenProps.quantity <= 0}
+                        />
+                      </div>
+                    )
+                  }}
+                </AvailabilityTemplate>
+              </AvailabilityContainer>
+            </Skus>
+          </SkusContainer>
+        </OrderContainer>
+      </OrderStorage>
+    </CommerceLayer>
+  )
+}
+
+DisabledWhenOutOfStock.args = {}
 
 /**
  * You can access the component children props to customize the button or use a different tag.

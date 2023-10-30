@@ -26,7 +26,7 @@ import { ShippingMethodRadioButton } from '#components/shipping_methods/Shipping
 import { ShippingMethodName } from '#components/shipping_methods/ShippingMethodName'
 import { ShippingMethodPrice } from '#components/shipping_methods/ShippingMethodPrice'
 import { DeliveryLeadTime } from '#components/skus/DeliveryLeadTime'
-import { persistKey } from './common'
+import { persistKey } from './utils'
 
 const setup: Meta = {
   title: 'Examples/Checkout Page/Items'
