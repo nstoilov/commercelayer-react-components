@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-base-to-string */
 import type { Meta, StoryFn } from '@storybook/react'
 import CommerceLayer from '../../_internals/CommerceLayer'
 import OrderContainer from '#components/orders/OrderContainer'
@@ -21,8 +23,9 @@ const setup: Meta = {
 
 export default setup
 
+const inputCss = 'border border-gray-300 p-2 rounded-md w-full'
+
 export const CustomerAddresses: StoryFn = (args) => {
-  const inputCss = 'border border-gray-300 p-2 rounded-md w-full'
   const [order, setOrder] = useState<Order | null>(null)
 
   const billingAddress = useMemo(
@@ -39,22 +42,23 @@ export const CustomerAddresses: StoryFn = (args) => {
     <CommerceLayer accessToken='my-access-token'>
       <OrderStorage persistKey={persistKey}>
         <OrderContainer fetchOrder={setOrder}>
-          <section className='max-w-xl'>
+          <section title='Checkout Address' className='max-w-xl'>
             <CustomerContainer isGuest>
-              <div className='mb-4'>
-                <label htmlFor='customer_email'>Customer email</label>
-                <CustomerInput
-                  id='customer_email'
-                  className={inputCss}
-                  placeholder='email'
-                  saveOnBlur
-                  errorClassName='border-red-600'
-                  value={order?.customer_email ?? ''}
-                />
-                <Errors resource='orders' field='customer_email' />
-              </div>
-
               <AddressesContainer shipToDifferentAddress={false}>
+                <div className='mb-4'>
+                  <label htmlFor='customer_email'>Customer email</label>
+                  <CustomerInput
+                    id='customer_email'
+                    className={inputCss}
+                    placeholder='email'
+                    errorClassName='border-red-600'
+                    value={order?.customer_email ?? ''}
+                  />
+                  <Errors resource='orders' field='customer_email' />
+                </div>
+
+                {/*  Use `key` to re-render the BillingAddressForm once we have the order from  `fetchOrder`. */}
+                {/*  When you are in your own project, you can retrieve the order before rendering the form. */}
                 <BillingAddressForm key={billingAddress?.id}>
                   <fieldset className='flex gap-4 w-full mb-4'>
                     <div className='flex-1'>
@@ -226,6 +230,36 @@ export const CustomerAddresses: StoryFn = (args) => {
               </AddressesContainer>
             </CustomerContainer>
           </section>
+        </OrderContainer>
+      </OrderStorage>
+    </CommerceLayer>
+  )
+}
+
+export const CustomerEmailSaveOnBlur: StoryFn = (args) => {
+  const [order, setOrder] = useState<Order | null>(null)
+
+  return (
+    <CommerceLayer accessToken='my-access-token'>
+      <OrderStorage persistKey={persistKey}>
+        <OrderContainer fetchOrder={setOrder}>
+          <CustomerContainer isGuest>
+            <div className='max-w-xl'>
+              <label htmlFor='customer_email'>Customer email</label>
+              <CustomerInput
+                id='customer_email'
+                className={inputCss}
+                placeholder='email'
+                saveOnBlur
+                onBlur={(savedCustomerEmail) => {
+                  alert(`Customer email saved: ${savedCustomerEmail}`)
+                }}
+                errorClassName='border-red-600'
+                value={order?.customer_email ?? ''}
+              />
+              <Errors resource='orders' field='customer_email' />
+            </div>
+          </CustomerContainer>
         </OrderContainer>
       </OrderStorage>
     </CommerceLayer>
