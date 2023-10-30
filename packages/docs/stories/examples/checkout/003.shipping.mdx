@@ -1,5 +1,5 @@
 import { Meta, Source, Canvas } from '@storybook/addon-docs';
-import * as Stories from './003.shippingMethods.stories.tsx'
+import * as Stories from './003.shipping.stories.tsx'
 
 <Meta of={Stories} />
 
@@ -12,5 +12,13 @@ the user will be able to select a shipping method for each shipment and we can u
 nested inside a `<ShipmentContainer>` component to list the order `line_items` for each shipment.
 
 When a `<LineItemsContainer>` is used inside a shipment context, the list will be filtered based on the items that will be included in that shipment.
+
+<span title='Requirement' type='warning'>
+To display shipping methods, the order must have been updated with a shipping address.
+Remember that a you can set the shipping address the same as billing (the address will be cloned) or define a different address.
+
+If you are not seeing any shipping methods in the box below, reach the previous step and set a proper address.
+In this demo, shipping methods are only available for the following countries: IT, DE, ES, FR, ES and NL.
+</span>
 
 <Canvas of={Stories.ShipmentMethods} />

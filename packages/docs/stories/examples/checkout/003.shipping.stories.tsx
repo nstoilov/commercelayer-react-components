@@ -11,7 +11,7 @@ import { ShippingMethodRadioButton } from '#components/shipping_methods/Shipping
 import { ShippingMethodName } from '#components/shipping_methods/ShippingMethodName'
 import { ShippingMethodPrice } from '#components/shipping_methods/ShippingMethodPrice'
 import { DeliveryLeadTime } from '#components/skus/DeliveryLeadTime'
-import { persistKey } from './common'
+import { persistKey } from './utils'
 
 const setup: Meta = {
   title: 'Examples/Checkout Page/Shipping Methods'
@@ -25,10 +25,10 @@ export const ShipmentMethods: StoryFn = (args) => {
       <OrderStorage persistKey={persistKey}>
         <OrderContainer>
           <ShipmentsContainer>
-            <Errors resource='shipments' />
+            <Errors resource='shipments' className='block' />
             <Shipment>
-              <ShipmentField name='number' />
-              <ShippingMethod>
+              <ShipmentField name='number' className='block' />
+              <ShippingMethod emptyText='Please set as your address an allowed country to view available shipping methods'>
                 <div className='block'>
                   <ShippingMethodRadioButton />
                   <ShippingMethodName />

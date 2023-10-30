@@ -11,7 +11,9 @@ import { AddressInput } from '#components/addresses/AddressInput'
 import { AddressCountrySelector } from '#components/addresses/AddressCountrySelector'
 import { AddressStateSelector } from '#components/addresses/AddressStateSelector'
 import { SaveAddressesButton } from '#components/addresses/SaveAddressesButton'
-import { persistKey } from './common'
+import { makeAddressWithRequired, persistKey } from './utils'
+import { useMemo, useState } from 'react'
+import { type Order } from '@commercelayer/sdk'
 
 const setup: Meta = {
   title: 'Examples/Checkout Page/Addresses'
@@ -21,10 +23,22 @@ export default setup
 
 export const CustomerAddresses: StoryFn = (args) => {
   const inputCss = 'border border-gray-300 p-2 rounded-md w-full'
+  const [order, setOrder] = useState<Order | null>(null)
+
+  const billingAddress = useMemo(
+    () => makeAddressWithRequired(order?.billing_address),
+    [order?.billing_address]
+  )
+
+  // const shippingAddress = useMemo(
+  //   () => makeAddressWithRequired(order?.shipping_address),
+  //   [order?.shipping_address]
+  // )
+
   return (
     <CommerceLayer accessToken='my-access-token'>
       <OrderStorage persistKey={persistKey}>
-        <OrderContainer>
+        <OrderContainer fetchOrder={setOrder}>
           <section className='max-w-xl'>
             <CustomerContainer isGuest>
               <div className='mb-4'>
@@ -35,12 +49,13 @@ export const CustomerAddresses: StoryFn = (args) => {
                   placeholder='email'
                   saveOnBlur
                   errorClassName='border-red-600'
+                  value={order?.customer_email ?? ''}
                 />
                 <Errors resource='orders' field='customer_email' />
               </div>
 
               <AddressesContainer shipToDifferentAddress={false}>
-                <BillingAddressForm>
+                <BillingAddressForm key={billingAddress?.id}>
                   <fieldset className='flex gap-4 w-full mb-4'>
                     <div className='flex-1'>
                       <label htmlFor='billing_address_first_name'>
@@ -51,6 +66,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                         name='billing_address_first_name'
                         type='text'
                         className={inputCss}
+                        value={billingAddress?.first_name}
                       />
                       <Errors
                         resource='billing_address'
@@ -67,6 +83,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                         name='billing_address_last_name'
                         type='text'
                         className={inputCss}
+                        value={billingAddress?.last_name}
                       />
                       <Errors
                         resource='billing_address'
@@ -76,16 +93,36 @@ export const CustomerAddresses: StoryFn = (args) => {
                   </fieldset>
 
                   <div className='mb-4'>
-                    <label htmlFor='billing_address_line_1'>Address</label>
+                    <label htmlFor='billing_address_line_1'>
+                      Address line 1
+                    </label>
                     <AddressInput
                       id='billing_address_line_1'
                       name='billing_address_line_1'
                       type='text'
                       className={inputCss}
+                      value={billingAddress?.line_1}
                     />
                     <Errors
                       resource='billing_address'
                       field='billing_address_line_1'
+                    />
+                  </div>
+
+                  <div className='mb-4'>
+                    <label htmlFor='billing_address_line_2'>
+                      Address line 2
+                    </label>
+                    <AddressInput
+                      id='billing_address_line_2'
+                      name='billing_address_line_2'
+                      type='text'
+                      className={inputCss}
+                      value={billingAddress?.line_2}
+                    />
+                    <Errors
+                      resource='billing_address'
+                      field='billing_address_line_2'
                     />
                   </div>
 
@@ -97,6 +134,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                         name='billing_address_city'
                         type='text'
                         className={inputCss}
+                        value={billingAddress?.city}
                       />
                       <Errors
                         resource='billing_address'
@@ -105,7 +143,9 @@ export const CustomerAddresses: StoryFn = (args) => {
                     </div>
 
                     <div className='flex-1'>
-                      <label htmlFor='billing_address_country_code'>City</label>
+                      <label htmlFor='billing_address_country_code'>
+                        Country
+                      </label>
                       <AddressCountrySelector
                         data-cy='billing_address_country_code'
                         name='billing_address_country_code'
@@ -115,6 +155,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                           label: 'Country',
                           disabled: true
                         }}
+                        value={billingAddress?.country_code}
                       />
                       <Errors
                         resource='billing_address'
@@ -135,6 +176,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                           disabled: true
                         }}
                         className={inputCss}
+                        value={billingAddress?.state_code}
                       />
                       <Errors
                         resource='billing_address'
@@ -149,6 +191,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                         name='billing_address_zip_code'
                         type='text'
                         className={inputCss}
+                        value={billingAddress?.zip_code}
                       />
                       <Errors
                         resource='billing_address'
@@ -164,6 +207,7 @@ export const CustomerAddresses: StoryFn = (args) => {
                       name='billing_address_phone'
                       type='tel'
                       className={inputCss}
+                      value={billingAddress?.phone}
                     />
                     <Errors
                       resource='billing_address'
@@ -173,10 +217,10 @@ export const CustomerAddresses: StoryFn = (args) => {
                 </BillingAddressForm>
 
                 <SaveAddressesButton
-                  className='p-4 bg-black text-white rounded'
+                  className='p-4 bg-black text-white rounded disabled:opacity-50'
                   label='Save address'
                   onClick={() => {
-                    console.log('Address updated')
+                    alert('Address updated')
                   }}
                 />
               </AddressesContainer>
