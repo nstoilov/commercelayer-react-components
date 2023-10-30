@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react'
-import CommerceLayer from '../_internals/CommerceLayer'
+import CommerceLayer from '../../_internals/CommerceLayer'
 import OrderContainer from '#components/orders/OrderContainer'
 import LineItemsContainer from '#components/line_items/LineItemsContainer'
 import LineItem from '#components/line_items/LineItem'
@@ -7,7 +7,7 @@ import LineItemName from '#components/line_items/LineItemName'
 import LineItemImage from '#components/line_items/LineItemImage'
 import LineItemAmount from '#components/line_items/LineItemAmount'
 import LineItemsEmpty from '#components/line_items/LineItemsEmpty'
-import { OrderStorage, AddSampleItems } from '../_internals/OrderStorage'
+import { OrderStorage, AddSampleItems } from '../../_internals/OrderStorage'
 import LineItemQuantity from '#components/line_items/LineItemQuantity'
 import { CustomerContainer } from '#components/customers/CustomerContainer'
 import { CustomerInput } from '#components/customers/CustomerInput'
@@ -18,20 +18,26 @@ import { AddressInput } from '#components/addresses/AddressInput'
 import { AddressCountrySelector } from '#components/addresses/AddressCountrySelector'
 import { AddressStateSelector } from '#components/addresses/AddressStateSelector'
 import { SaveAddressesButton } from '#components/addresses/SaveAddressesButton'
+import { ShipmentsContainer } from '#components/shipments/ShipmentsContainer'
+import { Shipment } from '#components/shipments/Shipment'
+import { ShipmentField } from '#components/shipments/ShipmentField'
+import { ShippingMethod } from '#components/shipping_methods/ShippingMethod'
+import { ShippingMethodRadioButton } from '#components/shipping_methods/ShippingMethodRadioButton'
+import { ShippingMethodName } from '#components/shipping_methods/ShippingMethodName'
+import { ShippingMethodPrice } from '#components/shipping_methods/ShippingMethodPrice'
+import { DeliveryLeadTime } from '#components/skus/DeliveryLeadTime'
+import { persistKey } from './common'
 
 const setup: Meta = {
-  title: 'Examples/Checkout Page'
+  title: 'Examples/Checkout Page/Items'
 }
 
 export default setup
 
 export const ListOfItems: StoryFn = (args) => {
   return (
-    <CommerceLayer
-      accessToken='my-access-token'
-      endpoint='https://demo-store.commercelayer.io'
-    >
-      <OrderStorage persistKey='cl-examples-checkout1'>
+    <CommerceLayer accessToken='my-access-token'>
+      <OrderStorage persistKey={persistKey}>
         <OrderContainer>
           <section className='max-w-xl'>
             <LineItemsContainer>
@@ -227,6 +233,35 @@ export const CustomerAddresses: StoryFn = (args) => {
               </AddressesContainer>
             </CustomerContainer>
           </section>
+        </OrderContainer>
+      </OrderStorage>
+    </CommerceLayer>
+  )
+}
+
+export const ShipmentMethods: StoryFn = (args) => {
+  return (
+    <CommerceLayer
+      accessToken='my-access-token'
+      endpoint='https://demo-store.commercelayer.io'
+    >
+      <OrderStorage persistKey='cl-examples-checkout1'>
+        <OrderContainer>
+          <ShipmentsContainer>
+            <Errors resource='shipments' />
+            <Shipment>
+              <ShipmentField name='number' />
+              <ShippingMethod>
+                <div className='block'>
+                  <ShippingMethodRadioButton />
+                  <ShippingMethodName />
+                  <ShippingMethodPrice />
+                  <DeliveryLeadTime type='min_days' />-
+                  <DeliveryLeadTime type='max_days' />
+                </div>
+              </ShippingMethod>
+            </Shipment>
+          </ShipmentsContainer>
         </OrderContainer>
       </OrderStorage>
     </CommerceLayer>

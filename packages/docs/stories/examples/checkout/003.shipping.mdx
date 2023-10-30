@@ -1,0 +1,16 @@
+import { Meta, Source, Canvas } from '@storybook/addon-docs';
+import * as Stories from './003.shippingMethods.stories.tsx'
+
+<Meta of={Stories} />
+
+## Shipping method selection
+Once we have the customer shipping address we can display the available shipping methods.
+The components will only display the available shipping methods for the matched zones found in the customer shipping address.
+
+If the inventory model is configured to split the order into multiple shipments (examples: items available from different warehouses), 
+the user will be able to select a shipping method for each shipment and we can use the `<LineItemsContainer>` component
+nested inside a `<ShipmentContainer>` component to list the order `line_items` for each shipment.
+
+When a `<LineItemsContainer>` is used inside a shipment context, the list will be filtered based on the items that will be included in that shipment.
+
+<Canvas of={Stories.ShipmentMethods} />
