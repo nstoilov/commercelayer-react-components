@@ -6,7 +6,6 @@
     "email": "alessandro@commercelayer.io"
   },
   "scripts": {
-    "preinstall": "npx only-allow npm",
     "build": "npm -r build",
     "prepare": "husky install",
     "test": "npm -r test",
