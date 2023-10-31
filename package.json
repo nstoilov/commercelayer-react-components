@@ -6,9 +6,7 @@
     "email": "alessandro@commercelayer.io"
   },
   "scripts": {
-    "build": "npm -r build",
     "prepare": "husky install",
-    "test": "npm -r test",
     "docs:dev": "npm --filter docs storybook",
     "docs:build": "npm --filter docs build-storybook"
   },
