@@ -4,7 +4,7 @@ import { PlaywrightTestConfig } from '@playwright/test'
 const config: PlaywrightTestConfig = {
   // timeout: 3000,
   webServer: {
-    command: 'pnpm start',
+    command: 'npm start',
     port: 3000,
     reuseExistingServer: true,
   },

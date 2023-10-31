@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useNx": false,
-  "npmClient": "pnpm",
+  "npmClient": "npm",
   "version": "4.7.4",
   "command": {
     "version": {
